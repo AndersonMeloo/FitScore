@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+🚀 Desafio FitScore 
+Este projeto foi desenvolvido como parte de um desafio prático para consolidar conhecimentos em React, ContextAPI, Hooks e boas práticas de organização de código.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📌 Objetivo do Projeto
 
-Currently, two official plugins are available:
+O objetivo principal foi criar uma aplicação estruturada em React, aplicando:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ContextAPI para gerenciamento de estado global
 
-## Expanding the ESLint configuration
+Hooks (useState, useContext, useEffect) para controle de dados e lógica
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Navegação entre páginas de forma fluida e organizada
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Boas práticas de organização de pastas e componentes
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+🛠️ Tecnologias Utilizadas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+React
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+ContextAPI
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+JavaScript / TypeScript (se você usou TS)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+CSS / Tailwind / Bootstrap (ajuste conforme o que você usou)
+
+📚 Aprendizados
+
+Durante o desenvolvimento deste projeto, meus principais aprendizados foram:
+
+Estruturar algo que parece ser "simples", mas exige organização e planejamento
+
+Maior controle com a ContextAPI
+
+Melhor entendimento e prática com os Hooks do React
+
+Importância de manter o projeto organizado e bem estruturado
+
+Pesquisa e aprendizado sobre n8n, mesmo sem implementá-lo diretamente neste projeto
+
+Reconhecimento da necessidade de aprofundar no BackEnd (Node.js + MongoDB), que seria a segunda parte do desafio
+
+⚠️ Limitações
+
+O backend não foi implementado neste projeto (apesar de já possuir conhecimento em Node.js e MongoDB)
+
+O fluxo com n8n não foi aplicado, mas pesquisei sobre a ferramenta e aprendi sua função no ecossistema
+
+🚀 Como Executar o Projeto
+git clone https://github.com/AndersonMeloo/FitScore.git
+npm install / npm i
+npm run dev
+
+Próximos Passos
+
+📌 Próximos Passos
+
+Implementar o backend em Node.js e MongoDB
+
+Conectar o backend ao frontend para persistência de dados
+
+Explorar melhor a integração com n8n
