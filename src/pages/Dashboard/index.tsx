@@ -12,7 +12,7 @@ const Dashboard = () => {
             setFitData([JSON.parse(dataStr)]);
         }
     }, []);
-
+    
     return (
         <>
             <div className="w-[80%] m-auto p-6 flex justify-center items-center mr-1">

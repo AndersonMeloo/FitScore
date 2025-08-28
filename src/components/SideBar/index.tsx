@@ -69,7 +69,7 @@ const Sidebar = () => {
                 </nav>
             </aside>
 
-            {mostrarBotaoLogin && pathname !== '/login' && pathname !== '/registrar' && (
+            {mostrarBotaoLogin && pathname !== '/login' && pathname !== '/registrar' && pathname !== '/dashboard' && pathname !== '/form' && pathname !== '/report' && (
                 <div className="w-full mx-auto text-center flex items-center justify-center gap-4">
                     <button
                         onClick={handleLoginClick}
