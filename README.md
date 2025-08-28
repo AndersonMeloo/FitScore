@@ -1,4 +1,5 @@
-🚀 Desafio FitScore 
+🚀 Desafio FitScore
+
 Este projeto foi desenvolvido como parte de um desafio prático para consolidar conhecimentos em React, ContextAPI, Hooks e boas práticas de organização de código.
 
 📌 Objetivo do Projeto
