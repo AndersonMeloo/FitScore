@@ -48,7 +48,9 @@ O fluxo com n8n não foi aplicado, mas pesquisei sobre a ferramenta e aprendi su
 🚀 Como Executar o Projeto
 
 git clone https://github.com/AndersonMeloo/FitScore.git
+
 npm install / npm i
+
 npm run dev
 
 Próximos Passos
