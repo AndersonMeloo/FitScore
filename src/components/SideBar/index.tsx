@@ -37,12 +37,12 @@ const Sidebar = () => {
                         <>
 
                             <Link className={linkClass("/login")} to="/login">
-                                <img className="w-6" src="./public/icons/form.png" alt="Ícone Usuário" />
+                                <img className="w-6" src="icons/form.png" alt="Ícone Usuário" />
                                 Login
                             </Link>
 
                             <Link className={linkClass("/registrar")} to="/registrar">
-                                <img className="w-6" src="./public/icons/form.png" alt="Ícone Usuário" />
+                                <img className="w-6" src="icons/form.png" alt="Ícone Usuário" />
                                 Registrar
                             </Link>
                         </>
@@ -51,17 +51,17 @@ const Sidebar = () => {
                     {auth.estaAutenticado && (
                         <>
                             <Link className={linkClass("/dashboard")} to="/dashboard">
-                                <img className="w-6" src="./public/icons/dashboard.png" alt="Ícone Dashboard" />
+                                <img className="w-6" src="icons/dashboard.png" alt="Ícone Dashboard" />
                                 Dashboard
                             </Link>
 
                             <Link className={linkClass("/form")} to="/form">
-                                <img className="w-6" src="./public/icons/form.png" alt="Ícone Relatório" />
+                                <img className="w-6" src="icons/form.png" alt="Ícone Relatório" />
                                 Formulário
                             </Link>
 
                             <Link className={linkClass("/report")} to="/report">
-                                <img className="w-6" src="./public/icons/evaluation.png" alt="Ícone Relatório" />
+                                <img className="w-6" src="icons/evaluation.png" alt="Ícone Relatório" />
                                 Relatório
                             </Link>
                         </>
