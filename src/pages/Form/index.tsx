@@ -29,7 +29,9 @@ const perguntas = {
 const Form = () => {
     const [respostas, setRespostas] = useState<Resposta[]>([])
 
-    const handleChange = (bloco: string, pergunta: string, valor: number) => {
+    // bloco: string,
+    const handleChange = (pergunta: string, valor: number) => {
+
         setRespostas(prev => {
             const other = prev.filter(r => r.pergunta !== pergunta)
             return [...other, { pergunta, valor }]
@@ -50,13 +52,16 @@ const Form = () => {
     }
 
     const handleSubmit = (e: React.FormEvent) => {
+
         e.preventDefault()
+
         const score = calcularFitScore()
         const classificacao = getClassificacao(score)
 
         const userStr = localStorage.getItem("user")
         const user = userStr ? JSON.parse(userStr) : {};
 
+        // Salva no LocalStorage
         localStorage.setItem('fitscore', JSON.stringify({
             user,
             respostas,
@@ -76,20 +81,22 @@ const Form = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
                     {Object.entries(perguntas).map(([bloco, perguntasBloco]) => (
+
                         <div key={bloco} className="mb-4">
 
-                            <h2 className="font-semibold text-lg capitalize">{bloco}</h2>
+                            {/* <h2 className="font-semibold text-lg capitalize">{bloco}</h2> */}
 
                             {perguntasBloco.map((pergunta) => (
 
                                 <div key={pergunta} className="flex items-center gap-2 mt-2">
 
                                     <label className="flex-1">{pergunta}</label>
-                                    
+
                                     <select
                                         required
                                         className="border p-1 rounded"
-                                        onChange={(e) => handleChange(bloco, pergunta, parseInt(e.target.value))}
+                                        // bloco
+                                        onChange={(e) => handleChange(pergunta, parseInt(e.target.value))}
                                     >
                                         <option value="">Selecione</option>
                                         {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
@@ -105,7 +112,6 @@ const Form = () => {
                     >
                         Enviar
                     </button>
-                    
                 </form>
             </div>
         </>
