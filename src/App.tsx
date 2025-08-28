@@ -13,7 +13,8 @@ function App() {
       <div style={{ display: "flex" }}>
 
         <Sidebar />
-        <div style={{ flex: 1, padding: "20px" }}>
+        
+         <div className="flex-1 p-4 md:p-6">
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/registrar" element={<Registrar />} />
