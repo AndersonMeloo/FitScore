@@ -46,6 +46,7 @@ O backend não foi implementado neste projeto (apesar de já possuir conheciment
 O fluxo com n8n não foi aplicado, mas pesquisei sobre a ferramenta e aprendi sua função no ecossistema
 
 🚀 Como Executar o Projeto
+
 git clone https://github.com/AndersonMeloo/FitScore.git
 npm install / npm i
 npm run dev
