@@ -19,9 +19,10 @@ Boas práticas de organização de pastas e componentes
 React
 
 ContextAPI
+
  TypeScript
 
- / Tailwind /
+ Tailwind
 
 📚 Aprendizados
 
