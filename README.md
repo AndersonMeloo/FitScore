@@ -22,7 +22,7 @@ ContextAPI
 
 JavaScript / TypeScript (se você usou TS)
 
-CSS / Tailwind / Bootstrap (ajuste conforme o que você usou)
+ / Tailwind /
 
 📚 Aprendizados
 
