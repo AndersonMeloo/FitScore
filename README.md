@@ -19,8 +19,7 @@ Boas práticas de organização de pastas e componentes
 React
 
 ContextAPI
-
-JavaScript / TypeScript (se você usou TS)
+ TypeScript
 
  / Tailwind /
 
