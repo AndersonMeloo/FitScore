@@ -1,0 +1,33 @@
+npm install typescript --save-dev
+tsc --init
+npm install fastify @fastify/cors
+
+npm i tsx
+
+npm i @types/node --save-dev
+
+npm install prisma --save-dev
+npm install @prisma/client
+npx prisma init
+
+npx prisma generate
+
+npx prisma studio - localhost
+
+Forçar 
+npx prisma db push
+
+-- Remoção do output no schema.prisma e npx prisma generate novamente para carregar a conexão da API 
+
+mongoDB
+andersonrodriguesmelo_db_user
+xH8kqklmeYOEnDG0
+
+git reflog commits Remotos e Não Remotos
+git checkout -b recuperar-backend 927255b
+
+git branch -D main - DELETE BRANCH
+
+git branch -m - Troca nome da BRANCH
+
+git push -u origin main --force
