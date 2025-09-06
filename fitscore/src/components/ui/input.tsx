@@ -37,6 +37,7 @@ function Input({ placeholder, password, value, required, onChange }: InputProps)
                     </button>
                 )}
             </div>
+            <p>teste</p>
         </>
     );
 }
