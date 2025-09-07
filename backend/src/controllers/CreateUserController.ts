@@ -19,7 +19,13 @@ class CreateUserController {
 
         const customer = await customerUser.execute({ name, email, password })
 
-        reply.send(customer)
+        const userForFrontEnd = {
+            id: customer.id,
+            name: customer.name,
+            email: customer.email
+        }
+
+        reply.send(userForFrontEnd)
     }
 }
 
