@@ -12,7 +12,7 @@ const start = async () => {
 
     await app.register(cors, {
         origin: '*',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST', 'DELETE', 'PUT']
     })
 
     await app.register(routes)
