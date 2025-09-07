@@ -8,12 +8,25 @@ datasource db {
 }
 
 model User {
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-    name     String
-    email    String
-    password String
-    created_at DateTime? @default(now())
-    updated_at DateTime? @default(now())
+    id         String     @id @default(auto()) @map("_id") @db.ObjectId
+    name       String
+    email      String     @unique
+    password   String
+    created_at DateTime?  @default(now())
+    updated_at DateTime?  @default(now())
+    FitScore   FitScore[]
 
     @@map("customers")
+}
+
+model FitScore {
+    id            String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId        String
+    user          User     @relation(fields: [userId], references: [id])
+    score         Int
+    classificacao String
+    respostas     Json
+    created_at    DateTime @default(now())
+
+    @@map("fitscores")
 }
