@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+// import { api } from "../../services/api";
 
 interface Usuario {
     name: string,
@@ -14,24 +16,52 @@ interface FitScore {
 
 const Dashboard = () => {
 
+    const { usuario } = useContext(AuthContext)
     const [fitData, setFitData] = useState<FitScore[]>([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
-        const dataStr = localStorage.getItem("fitscore");
+        const fetchFitScores = async () => {
 
-        if (dataStr) {
-            // JSON.stringify() -  Converte OBJETO para STRING
-            // JSON.parse() - Converte STRING para OBJETO
-            const data: FitScore = JSON.parse(dataStr)
-            setFitData([data])
+            if (!usuario) {
+                alert("Usuário não esta logado!")
+                setLoading(false)
+                return
+            }
+
+            try {
+
+                const response = await fetch(
+                    `http://localhost:3333/fitscores/${usuario.id}`
+                )
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar FitScores");
+                }
+
+                const data = await response.json()
+                setFitData(data)
+
+            } catch (err) {
+                console.log(err)
+                alert("Erro ao carregar FitScores do servidor.");
+
+            } finally {
+                setLoading(false)
+            }
         }
-    }, []);
+
+        fetchFitScores()
+    }, [usuario]);
+
 
     return (
         <>
+
             <div className="w-[80%] m-auto p-6 flex justify-center items-center mr-1">
-                {fitData.length === 0 ? (
+                {loading ? (
+                    <p>Carregando FitScores...</p>
+                ) : fitData.length === 0 ? (
                     <p>Nenhum candidato avaliado ainda.</p>
                 ) : (
                     <table className="w-[80%] mx-auto border-collapse border">
