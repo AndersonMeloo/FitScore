@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import Input from "../../components/ui/input";
+import { api } from "../../services/api";
+import { AxiosError } from "axios";
 
 function Login() {
+
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
 
@@ -12,29 +15,32 @@ function Login() {
     const [erro, setErro] = useState("");
     const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();
+        setLoading(true)
+        setErro("")
 
-        const userStr = localStorage.getItem("user");
+        try {
+            const response = await api.post("/login", { email, password });
 
-        if (!userStr) {
-            setErro("Nenhum usuário cadastrado");
-            return;
-        }
+            auth.login(response.data);
+            navigate("/form");
 
-        const user = JSON.parse(userStr);
+        } catch (err: unknown) {
 
-        if (user.email === email && user.password === password) {
-            setErro("");
-            setLoading(true)
-            auth?.login();
+            if (err instanceof AxiosError) {
 
-            setTimeout(() => {
-                navigate('/form')
-            }, 2000);
-        } else {
-            setErro("E-mail ou senha incorretos");
+                setErro(err.response?.data?.error || "Erro ao logar, usuário não cadastrado");
+            } else if (err instanceof Error) {
+
+                setErro(err.message);
+            } else {
+
+                setErro("Erro desconhecido ao logar, usuário não cadastrado");
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -62,7 +68,7 @@ function Login() {
                             required
                             className="border p-2 rounded"
                         />
-                        
+
                         <Input
                             placeholder="Senha"
                             value={password}
