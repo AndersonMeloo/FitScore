@@ -30,7 +30,7 @@ const Sidebar = () => {
         <>
             <aside className="w-64 min-h-screen bg-blue-800 shadow-md fixed ">
 
-                <div className="p-4 font-bold text-xl border-b text-white">FitScore LEGAL</div>
+                <div className="p-4 font-bold text-xl border-b text-white">FitScore</div>
 
                 <nav className="mt-4 flex flex-col gap-1">
                     {!auth.estaAutenticado && (
