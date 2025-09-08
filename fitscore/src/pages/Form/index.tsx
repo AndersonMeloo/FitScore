@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
 
 type Resposta = {
     pergunta: string,
@@ -28,6 +29,8 @@ const perguntas = {
 }
 
 const Form = () => {
+
+    const { usuario } = useContext(AuthContext)
 
     // Object.values - Joga todos em uma Array 
     // .flat() - Coloca todos em um Array Único de Strings
@@ -65,32 +68,56 @@ const Form = () => {
     }
 
     const [loading, setLoading] = useState(false)
-    const handleSubmit = (e: React.FormEvent) => {
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
 
         const score = calcularFitScore()
         const classificacao = getClassificacao(score)
 
-        const userStr = localStorage.getItem("user")
-        const user = userStr ? JSON.parse(userStr) : {};
-
-        localStorage.setItem('fitscore', JSON.stringify({
-            user,
-            respostas,
-            score,
-            classificacao
-        }))
-
-        alert(`FitScore: ${score}\nClassificação: ${classificacao}`)
-
         setLoading(true)
-        setTimeout(() => {
+
+        try {
+
+            if (!usuario) {
+                alert("Usuário não está logado")
+                setLoading(false)
+                return  
+            }
+
+            const response = await fetch("http://localhost:3333/fitscore", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify({
+                    userId: usuario.id,
+                    score,
+                    classificacao,
+                    respostas
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error('Erro ao Salvar FitScore')
+            }
+
+            const data = await response.json()
+            console.log("Fitscore salvo:", data)
+
+            alert(`FitScore: ${score}\nClassificação: ${classificacao}`);
             navigate("/dashboard");
-        }, 2000);
+        } catch (error) {
+            console.log(error)
+            alert("Erro ao salvar FitScore no servidor.");
+        } finally {
+            setLoading(false);
+        }
     }
 
-    const navigate = useNavigate()
 
     // const handleSubmitForm = () => {
     //     navigate('/dashboard')
