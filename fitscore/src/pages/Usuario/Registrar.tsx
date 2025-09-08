@@ -2,32 +2,56 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import Input from "../../components/ui/input";
+import { api } from "../../services/api";
+import { AxiosError } from "axios";
 
 function Registrar() {
-
-    const navigate = useNavigate();
-    const auth = useContext(AuthContext);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const navigate = useNavigate();
+    const auth = useContext(AuthContext);
 
-        localStorage.setItem(
-            "user",
-            JSON.stringify({ name, email, password }),
-        );
+    const handleSubmit = async (e: React.FormEvent) => {
 
+        e.preventDefault()
         setLoading(true)
-        auth?.login();
 
-        setTimeout(() => {
-            navigate("/form");
-        }, 2000);
-    };
+        try {
+
+            const response = await api.post("/users", {
+                name,
+                email,
+                password
+            })
+
+            console.log('Usuario cadastrado', response.data)
+
+            auth.login(response.data)
+            navigate('/form')
+
+        } catch (err: unknown) {
+
+            if (err instanceof AxiosError) {
+
+                console.log('Erro ao criar usuário', err.response?.data || err.message)
+                alert(err.response?.data || 'Erro ao cadastrar usuario')
+            } else if (err instanceof Error) {
+
+                alert(err.message)
+                console.log("Erro ao criar usuário", err.message)
+            } else {
+
+                console.log("Erro desconhecido", err);
+                alert("Erro desconhecido ao cadastrar usuario");
+            }
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
 
@@ -66,7 +90,7 @@ function Registrar() {
                             value={password}
                             onChange={(val) => setPassword(val)}
                             required
-                            password   
+                            password
                             className="border p-2 rounded"
                         />
                         <button
