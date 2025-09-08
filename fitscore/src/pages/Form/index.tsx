@@ -9,22 +9,22 @@ type Resposta = {
 
 const perguntas = {
     performance: [
-        'Experiência',
-        'Entregas',
-        'Habilidades'
+        'Experiência:',
+        'Entregas:',
+        'Habilidades:'
     ],
 
     energia: [
-        'Disponibilidade',
-        'Prazos',
-        'Pressão'
+        'Disponibilidade:',
+        'Prazos:',
+        'Pressão:'
     ],
 
     cultura: [
-        "Valores da LEGAL",
-        "Trabalho em equipe",
-        "Proatividade",
-        "Comunicação"
+        "Valores:",
+        "Trabalho em equipe:",
+        "Proatividade:",
+        "Comunicação:"
     ]
 }
 
