@@ -1,4 +1,4 @@
-🚀 Tecnologias principais:
+🚀 Tecnologias:
 - Backend: Node.js - Fastify, Prisma ORM
 - Banco de dados: MongoDB
 - Frontend: React, TypeScript, TailwindCSS
