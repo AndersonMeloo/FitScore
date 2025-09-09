@@ -1,0 +1,115 @@
+// Salvo no Local Storage
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [loading, setLoading] = useState(false)
+
+const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify({ name, email, password }),
+    );
+
+    setLoading(true)
+    auth?.login();
+
+    setTimeout(() => {
+        navigate("/form");
+    }, 2000);
+};
+
+<form onSubmit={ handleSubmit }...
+
+//   AuthContext
+const AuthContext = createContext<AuthContextType | undefined > (undefined);
+
+// AuthContext MOCK LOCAL 
+import { createContext, useState, type ReactNode, } from "react";
+
+type AuthContextType = {
+
+    estaAutenticado: boolean;
+    login: (user: User) => void;
+    logout: () => void;
+};
+
+const AuthContext = createContext({} as AuthContextType);
+
+const AuthProvider = ({ children }: { children: ReactNode }) => {
+
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
+
+    const login = () => setEstaAutenticado(true);
+    const logout = () => setEstaAutenticado(false);
+
+    return (
+        <>
+            <AuthContext.Provider value={{ estaAutenticado, login, logout }
+            }>
+                {children}
+            </AuthContext.Provider>
+        </>
+    );
+};
+
+export { AuthContext, AuthProvider }
+
+// LOGIN
+const handleSubmit = (e: React.FormEvent) => {
+
+    e.preventDefault();
+
+    const userStr = localStorage.getItem("user");
+
+    if (!userStr) {
+        setErro("Nenhum usuário cadastrado");
+        return;
+    }
+
+    const user = JSON.parse(userStr);
+
+    if (user.email === email && user.password === password) {
+        setErro("");
+        setLoading(true)
+        auth?.login();
+
+        setTimeout(() => {
+            navigate('/form')
+        }, 2000);
+    } else {
+        setErro("E-mail ou senha incorretos");
+    }
+};
+
+findUnique → busca por campo único e retorna no máximo 1 registro.
+
+    findFirst → busca pelo primeiro registro que bate a condição, mesmo que não seja único.
+
+    {/* form mock local */ }
+const handleSubmit = (e: React.FormEvent) => {
+
+    e.preventDefault()
+
+    const score = calcularFitScore()
+    const classificacao = getClassificacao(score)
+
+
+    // const userStr = localStorage.getItem("user")
+    // const user = userStr ? JSON.parse(userStr) : {};
+
+    localStorage.setItem('fitscore', JSON.stringify({
+        user: usuario,
+        respostas,
+        score,
+        classificacao
+    }))
+
+    alert(`FitScore: ${score}\nClassificação: ${classificacao}`)
+
+    setLoading(true)
+    setTimeout(() => {
+        navigate("/dashboard");
+    }, 2000);
+}
