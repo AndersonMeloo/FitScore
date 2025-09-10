@@ -78,8 +78,8 @@ const Dashboard = () => {
                         <tbody>
                             {fitData.map((f, idx) => (
                                 <tr key={idx}>
-                                    <td className="border p-2">{f.user.name}</td>
-                                    <td className="border p-2">{f.user.email}</td>
+                                    <td className="border p-2">{usuario?.name}</td>
+                                    <td className="border p-2">{usuario?.email}</td>
                                     <td className="border p-2">{f.score}</td>
                                     <td className="border p-2">{f.classificacao}</td>
                                 </tr>
