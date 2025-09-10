@@ -14,19 +14,23 @@ model User {
     password   String
     created_at DateTime?  @default(now())
     updated_at DateTime?  @default(now())
-    FitScore   FitScore[]
+    scores     FitScore[]
 
     @@map("customers")
 }
 
-model FitScore {
-    id            String   @id @default(auto()) @map("_id") @db.ObjectId
-    userId        String
-    user          User     @relation(fields: [userId], references: [id])
+type FitScore {
+    // id            String   @id @default(auto()) @map("_id") @db.ObjectId
+    // userId        String
+    // user          User     @relation(fields: [userId], references: [id])
     score         Int
     classificacao String
     respostas     Json
     created_at    DateTime @default(now())
 
-    @@map("fitscores")
+    // @@map("fitscores")
+
+    // Cada FitScore agora é um Subdocumento dentro do Array scores do User.
+    // salva um FitScore, ele entra dentro do Usuário Existente
+    // Não gera um registro independente
 }
