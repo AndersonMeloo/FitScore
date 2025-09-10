@@ -68,8 +68,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         }
 
         try {
+
+            // update: Modifica o Usuário (Adiciona o FitScore).
             const updatedUser = await prismaClient.user.update({
-                where: { id: userId },
+                where: { id: userId }, // where: Busca o Usuário pelo ID
                 data: {
                     scores: {
                         push: {
@@ -80,7 +82,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
                         }
                     }
                 },
-                select: {
+                select: { // select: Retorna os Campos
                     id: true,
                     name: true,
                     email: true,
@@ -102,6 +104,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
         try {
 
+            // findUnique: Lê os Dados dos Usuários (Pega os FitScores Existentes).
             const userWithScores = await prismaClient.user.findUnique({
 
                 where: { id: userId },
@@ -110,7 +113,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
                     name: true,
                     email: true,
                     scores: true
-                }
+                }   
             })
 
             if (!userWithScores) {
