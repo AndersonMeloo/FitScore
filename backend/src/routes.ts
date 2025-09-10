@@ -63,15 +63,34 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
             respostas: any[]
         }
 
+        if(!userId || score === undefined || !classificacao || !respostas)  {
+            return reply.status(400).send({error: 'Dados Incompletos'})
+        }
+
         try {
+            const updatedUser = await prismaClient.user.update({
+                where: { id: userId },
+                data: {
+                    scores: {
+                        push: {
+                            score,
+                            classificacao,
+                            respostas,
+                            created_at: new Date()
+                        }
+                    }
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    scores: true
+                }
+            });
 
-            const newFit = await prismaClient.fitScore.create({
-
-                data: { userId, score, classificacao, respostas }
-            })
-
-            return reply.send(newFit)
+            return reply.send(updatedUser);
         } catch (error) {
+            console.error('Erro ao salvar Fiscore:', error)
             return reply.status(500).send({ error: "Erro ao salvar FitScore" })
         }
     })
@@ -83,16 +102,22 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
         try {
 
-            const fitscores = await prismaClient.fitScore.findMany({
-                where: { userId },
-                include: {
-                    user: {
-                        select: { id: true, name: true, email: true }
-                    }
+            const userWithScores = await prismaClient.user.findUnique({
+
+                where: { id: userId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    scores: true
                 }
             })
 
-            return reply.send(fitscores)
+            if (!userWithScores) {
+                return reply.status(404).send({ error: 'Usuário não encontrado' })
+            }
+
+            return reply.send(userWithScores.scores)
         } catch (err) {
             console.log(err)
             return reply.status(500).send({ error: "Erro ao buscas FitScores" })
